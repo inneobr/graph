@@ -8,8 +8,8 @@ export interface SearchResult {
 
 export async function GoogleService(query: string): Promise<SearchResult[]> {
   try {
-    const url = `http://10.1.1.2:8080/search?q=${encodeURIComponent(query)}`;
-
+    const searxng = process.env.SEARXNG_SERVER || 'http://10.1.1.2:8080';
+    const url = `${searxng}/search?q=$${encodeURIComponent(query)}`;
     const response = await fetch(url, {
       headers: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",

@@ -7,8 +7,8 @@ export async function GET(req: NextRequest) {
     const query = searchParams.get("search_query");
 
     if(!query) return NextResponse.json({status: "running"},{ status: 200 });
-
-    const response = await fetch(`http://10.1.1.2:8080/search?q=${encodeURIComponent(query)}`, {
+    const searxng = process.env.SEARXNG_SERVER || 'http://10.1.1.2:8080';
+    const response = await fetch(`${searxng}/search?q=$${encodeURIComponent(query)}`, {
       headers: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
